@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "cloudflare-docs": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-cloudflare-docs@latest"]
+    },
+    "astro-docs": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-astro-docs@latest"]
+    }
+  }
+}
