@@ -15,7 +15,7 @@ const repetitions = 5;
 <Base title={title} description={description}>
   <div class="shortcut-container select-none" aria-label="Shortcut">
     {Array.from({ length: repetitions }).map((_, i) => (
-      <span class="shortcut-text font-bold leading-none tracking-tight text-center block" aria-hidden={i > 0}>
+      <span class="shortcut-text font-bold block" aria-hidden={i > 0}>
         Shortcut
       </span>
     ))}
@@ -26,18 +26,20 @@ const repetitions = 5;
   .shortcut-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     width: 100%;
-    overflow: hidden;
+    overflow: visible;
+    padding-left: 2vw;
   }
 
   .shortcut-text {
     font-family: var(--font-serif);
-    font-size: 20vw;
-    line-height: 0.85;
+    font-size: 28vw;
+    line-height: 0.42;
+    letter-spacing: -0.025em;
     color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.6);
     white-space: nowrap;
   }
 </style>
