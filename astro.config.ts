@@ -23,7 +23,7 @@ export default defineConfig({
         context: 'client',
         access: 'public',
         optional: true,
-        default: '',
+        default: 'pa-jq8pOq83bDgBTsfR2u6fJ',
       }),
     },
   },
