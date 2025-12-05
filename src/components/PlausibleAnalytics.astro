@@ -1,0 +1,25 @@
+---
+/**
+ * Plausible Analytics (self-hosted at analytics.shortcut.gr)
+ * New script pattern (October 2025) - unique script ID per site.
+ */
+import { PUBLIC_PLAUSIBLE_SCRIPT_ID } from 'astro:env/client';
+
+interface Props {
+  domain: string;
+}
+
+const { domain } = Astro.props;
+const scriptId = PUBLIC_PLAUSIBLE_SCRIPT_ID;
+const scriptUrl = scriptId ? `https://analytics.shortcut.gr/js/${scriptId}.js` : '';
+---
+
+{scriptId && (
+  <>
+    <script is:inline async src={scriptUrl}></script>
+    <script is:inline>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+  </>
+)}

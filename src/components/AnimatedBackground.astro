@@ -1,0 +1,150 @@
+---
+/**
+ * Gradient background with animated blobs
+ * Blue-gray base with indigo, violet, and cyan gradient blobs
+ */
+---
+
+<div class="animated-bg" aria-hidden="true">
+  <!-- Base color layer -->
+  <div class="base-layer"></div>
+
+  <!-- Gradient blobs -->
+  <div class="blob blob-coral-1"></div>
+  <div class="blob blob-coral-2"></div>
+  <div class="blob blob-mint"></div>
+
+</div>
+
+<style>
+  .animated-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .base-layer {
+    position: absolute;
+    inset: 0;
+    background-color: #1e293b; /* slate-800 - deep cool base */
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    will-change: transform;
+    /* Hardware acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* Reduce GPU load on mobile */
+  @media (max-width: 768px) {
+    .blob {
+      filter: blur(40px);
+      animation-duration: 12s !important;
+    }
+  }
+
+  /* Top-left indigo/blue blob */
+  .blob-coral-1 {
+    top: -20%;
+    left: -10%;
+    width: 80%;
+    height: 120%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(99, 102, 241, 1) 0%,
+      rgba(99, 102, 241, 0.8) 20%,
+      rgba(99, 102, 241, 0.5) 40%,
+      transparent 60%
+    );
+    animation: drift1 8s ease-in-out infinite;
+  }
+
+  /* Bottom-center purple/violet blob */
+  .blob-coral-2 {
+    top: 45%;
+    left: 10%;
+    width: 60%;
+    height: 100%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(139, 92, 246, 0.9) 0%,
+      rgba(139, 92, 246, 0.6) 25%,
+      rgba(139, 92, 246, 0.3) 45%,
+      transparent 60%
+    );
+    animation: drift2 10s ease-in-out infinite;
+  }
+
+  /* Right-side teal/cyan blob */
+  .blob-mint {
+    top: 10%;
+    right: 0%;
+    width: 50%;
+    height: 80%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(34, 211, 238, 1) 0%,
+      rgba(34, 211, 238, 0.7) 20%,
+      rgba(34, 211, 238, 0.4) 40%,
+      transparent 60%
+    );
+    animation: drift3 6s ease-in-out infinite;
+  }
+
+  @keyframes drift1 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    25% {
+      transform: translate(15%, 8%) scale(1.1);
+    }
+    50% {
+      transform: translate(10%, 20%) scale(1.15);
+    }
+    75% {
+      transform: translate(-5%, 12%) scale(1.05);
+    }
+  }
+
+  @keyframes drift2 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    25% {
+      transform: translate(-12%, -10%) scale(0.9);
+    }
+    50% {
+      transform: translate(-18%, 6%) scale(1.05);
+    }
+    75% {
+      transform: translate(8%, -8%) scale(0.95);
+    }
+  }
+
+  @keyframes drift3 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    25% {
+      transform: translate(-15%, 12%) scale(1.12);
+    }
+    50% {
+      transform: translate(-10%, -15%) scale(1.18);
+    }
+    75% {
+      transform: translate(12%, -6%) scale(1.08);
+    }
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .blob {
+      animation: none;
+    }
+  }
+</style>
