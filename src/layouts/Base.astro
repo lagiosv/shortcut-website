@@ -41,16 +41,14 @@ const canonicalURL = `https://www.${domain}`;
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Fonts: Roboto Serif (bold outlined text) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts: Roboto Serif (bold outlined text) - served via Cloudflare Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@700&display=swap"
       rel="stylesheet"
     />
 
     <!-- Analytics -->
-    <PlausibleAnalytics domain={domain} />
+    <PlausibleAnalytics />
   </head>
   <body class="h-screen overflow-hidden bg-slate-900 antialiased">
     <AnimatedBackground />
