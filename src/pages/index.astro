@@ -26,16 +26,21 @@ const repetitions = 4;
   .shortcut-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    width: 100%;
-    overflow: visible;
-    padding-left: 2vw;
+    align-items: center;
+    justify-content: flex-end;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    padding-bottom: 0;
+    /* Push down so bottom line is half outside */
+    margin-bottom: calc((100vw - 80px) / 5 * -0.5);
   }
 
   .shortcut-text {
     font-family: var(--font-serif);
-    font-size: 18vw;
+    font-size: calc((100vw - 80px) / 5);
     line-height: 0.42;
     letter-spacing: -0.025em;
     color: transparent;
