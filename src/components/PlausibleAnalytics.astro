@@ -2,19 +2,35 @@
 /**
  * Plausible Analytics (self-hosted at analytics.shortcut.gr)
  * New script pattern (October 2025) - unique script ID per site.
+ *
+ * IMPORTANT: For self-hosted Plausible with the new script (Oct 2025),
+ * you MUST set the `endpoint` option in plausible.init() - the old
+ * data-api attribute is no longer supported.
+ *
+ * @see https://plausible.io/docs/script-update-guide
  */
 import { PUBLIC_PLAUSIBLE_SCRIPT_ID } from 'astro:env/client';
 
 const scriptId = PUBLIC_PLAUSIBLE_SCRIPT_ID;
-const scriptUrl = scriptId ? `https://analytics.shortcut.gr/js/${scriptId}.js` : '';
+const plausibleHost = 'https://analytics.shortcut.gr';
+const scriptUrl = scriptId ? `${plausibleHost}/js/${scriptId}.js` : '';
+const apiEndpoint = `${plausibleHost}/api/event`;
 ---
 
 {scriptId && (
   <>
-    <script is:inline async src={scriptUrl}></script>
-    <script is:inline>
-      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-      plausible.init()
+    <script is:inline define:vars={{ scriptUrl }}>
+      // Dynamically load the Plausible script
+      const s = document.createElement('script');
+      s.src = scriptUrl;
+      s.async = true;
+      document.head.appendChild(s);
+    </script>
+    <script is:inline define:vars={{ apiEndpoint }}>
+      // Initialize Plausible with self-hosted endpoint (required for Oct 2025+ script)
+      window.plausible = window.plausible || function() { (plausible.q = plausible.q || []).push(arguments) };
+      plausible.init = plausible.init || function(i) { plausible.o = i || {} };
+      plausible.init({ endpoint: apiEndpoint });
     </script>
   </>
 )}
